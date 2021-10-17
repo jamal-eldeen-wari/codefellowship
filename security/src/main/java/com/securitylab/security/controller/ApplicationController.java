@@ -13,10 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.security.Principal;
 import java.util.ArrayList;
 //@SpringBootApplication
 //@ComponentScan(basePackageClasses = ApplicationController.class)
@@ -40,9 +42,9 @@ public class ApplicationController {
     }
 
     @GetMapping("/profile")
-    public String getProfile(Model model){
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username",userDetails.getUsername());
+    public String getProfile(Model model, Principal principal){
+        ApplicationUser applicationUser = appUserRepo.findApplicationUserByUsername(principal.getName());
+        model.addAttribute("username",applicationUser);
         return "profile";
     }
 
@@ -57,7 +59,20 @@ public class ApplicationController {
         applicationUser = appUserRepo.save(applicationUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(applicationUser,null,new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new RedirectView("/profile");
+        return new RedirectView("/");
+    }
+//    @GetMapping("/profile/{id}")
+//    public String getUserByUsername(Model model, @PathVariable Long id){
+//        ApplicationUser applicationUser = appUserRepo.findApplicationUserByID(id);
+//        model.addAttribute("username", applicationUser);
+//        return "profile";
+//    }
+
+    @GetMapping("profile/{id}")
+    public String getUserById(@PathVariable Long id , Model model){
+        model.addAttribute("username" , appUserRepo.findApplicationUserById(id));
+        return ("profile");
+
     }
 
 }
