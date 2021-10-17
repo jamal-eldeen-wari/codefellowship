@@ -10,14 +10,14 @@
         <div class="col-md-6 img">
             <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"  alt="" class="img-rounded">
         </div>
-        <div class="col-md-6 details">
+        <div class="col-md-6 details" th:each="ApplicationUser:${username}">
             <blockquote>
-                <h2>Hello, <span th:text="${username.firstName}"></span></h2>
+                <h2>Hello, <span th:text="${ApplicationUser.firstName}"></span></h2>
             </blockquote>
-            <p>First Name: <span th:text="${username.firstName}"></span></p>
-            <p>Last Name: <span th:text="${username.lastName}"></span></p>
-            <p>Date of Birth: <span th:text="${username.dob}"></span></p>
-            <p>Bio: <span th:text="${username.bio}"></span></p>
+            <p>First Name: <span th:text="${ApplicationUser.firstName}"></span></p>
+            <p>Last Name: <span th:text="${ApplicationUser.lastName}"></span></p>
+            <p>Date of Birth: <span th:text="${ApplicationUser.dob}"></span></p>
+            <p>Bio: <span th:text="${ApplicationUser.bio}"></span></p>
         </div>
     </div>
 </div>
