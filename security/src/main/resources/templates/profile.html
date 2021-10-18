@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <title>Profile</title>
 </head>
+<header>
+    <div th:each="ApplicationUser:${username}">
+        <nav>
+            <ul>
+                <li>
+                    <p> Hello: <span  th:text="${ApplicationUser.firstName}"></span></p>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</header>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-md-6 img">
-            <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"  alt="" class="img-rounded">
+            <img src="https://cdn-icons-png.flaticon.com/512/21/21104.png"  alt="" class="img-rounded">
         </div>
         <div class="col-md-6 details" th:each="ApplicationUser:${username}">
             <blockquote>
@@ -19,6 +31,15 @@
             <p>Date of Birth: <span th:text="${ApplicationUser.dob}"></span></p>
             <p>Bio: <span th:text="${ApplicationUser.bio}"></span></p>
         </div>
+    </div>
+
+    <div class="col-md-6 details" th:each="Post:${username.getPosts()}">
+        <blockquote>
+            <h2>Here is your latest Posts:</h2>
+        </blockquote>
+        <p>* <span th:text="${Post.getBody()}"></span></p>
+        <p>Created at:  <span th:text="${Post.getCreatedAt()}"></span></p>
+
     </div>
 </div>
 

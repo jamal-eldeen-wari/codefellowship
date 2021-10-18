@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 public class ApplicationUser implements UserDetails {
     @Id
@@ -19,6 +21,13 @@ public class ApplicationUser implements UserDetails {
     private String bio;
     @Column(unique = true)
     private String username;
+
+    @OneToMany(mappedBy = "applicationUser")
+    private List<Post> posts;
+
+    public List<Post> getPosts() {
+        return posts;
+    }
 
     public ApplicationUser(String username, String password, String firstName, String lastName, String dob, String bio) {
         this.username = username;

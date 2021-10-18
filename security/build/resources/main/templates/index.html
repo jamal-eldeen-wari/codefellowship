@@ -1,9 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
 </head>
+<header>
+    <div th:if="${param.signup}">
+    <div th:each="ApplicationUser:${username}">
+        <nav>
+            <ul>
+                <li>
+                    <p> Hello: <span  th:text="${ApplicationUser.firstName}"></span></p>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    </div>
+</header>
+
 <body>
 <nav>
     <ul>
