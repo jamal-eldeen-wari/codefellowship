@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Page</title>
+</head>
+<header>
+    <nav th:each="ApplicationUser:${username}">
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <p>Hello</p>
+            </li>
+        </ul>
+    </nav>
+</header>
+<body>
+<h1>Share Your Thoughts With Us </h1>
+
+<form action="/posts" method="post">
+<!--    <h2>Hello, <span th:text="${Post.ApplicationUser.firstName}"></span></h2>-->
+<!--    <br><br>-->
+    <label for="body">Body:</label>
+    <input type="text" id="body" name="body"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
