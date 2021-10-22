@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <header>
-    <nav>
-        <ul>
-            <li>
-                <a href="/">Home</a>
-            </li>
-        </ul>
-    </nav>
+    <div class="header">
+        <div class="logo">
+             <a href="/" >Code Fellow Ship </a>
+        </div >
+        <div class="header-right">
+
+            <a href="/signup">Sign Up</a>
+            <a href="/profile">Profile</a>
+        </div>
+    </div>
 </header>
 <body>
 <div th:if="${param.error}">
@@ -20,6 +24,8 @@
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
+<h1>Log-In </h1>
+
 <form action="/login" method="post">
     <div><label> Username : <input type="text" name="username"/> </label></div>
     <div><label> Password : <input type="password" name="password"/> </label></div>
@@ -27,4 +33,7 @@
 </form>
 
 </body>
+<footer>
+    <h2>Code Fellow Ship &copy;</h2>
+</footer>
 </html>

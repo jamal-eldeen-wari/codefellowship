@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Following Page</title>
+</head>
+<header>
+    <div class="header-right" th:each="ApplicationUser:${username}">
+        <p> Hello: <span  th:text="${ApplicationUser.firstName}"></span></p>
+        <a href="/profile">Profile</a>
+        <a href="/posts">Posts</a>
+        <a href="/feed">Feed</a>
+    </div>
+</header>
+<body>
+<div class="col-md-6 details" th:each="ApplicationUser:${username}">
+    <a th:href="'/profile/' + ${ApplicationUser.id}">
+        <span th:text="${ApplicationUser.username}"></span>
+    </a>
+</div>
+</body>
+<footer>
+    <h2>Code Fellow Ship &copy;</h2>
+</footer>
+</html>
