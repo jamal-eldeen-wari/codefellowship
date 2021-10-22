@@ -25,6 +25,20 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
     private List<Post> posts;
 
+    @ManyToMany
+    private List<ApplicationUser> followers;
+
+    public List<ApplicationUser> getFollowers() {
+        return followers;
+    }
+
+    public List<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    @ManyToMany
+    private List<ApplicationUser> following;
+
     public List<Post> getPosts() {
         return posts;
     }

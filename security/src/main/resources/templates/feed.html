@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Feed Page</title>
+</head>
+
+<header>
+  <div class="header-right" th:each="ApplicationUser:${username}">
+    <p> Hello: <span  th:text="${ApplicationUser.firstName}"></span></p>
+    <a href="/profile">Profile</a>
+    <a href="/posts">Posts</a>
+    <a href="/following">Following</a>
+  </div>
+</header>
+<body>
+
+<main>
+
+  <h2>Feed</h2>
+
+  <ul class="feed-list">
+    <li th:each="ApplicationUser : ${posts}">
+      <span th:text="${ApplicationUser.getCreatedAt()}"></span>
+      <span th:text="${ApplicationUser.getBody()}"></span>
+
+      <a th:href="@{'/profile' + ${ApplicationUser.id}}">
+        <span th:text="${ApplicationUser.username}"></span>
+      </a>
+    </li>
+  </ul>
+
+
+<!--  <th th:each="posts: ${posts}">-->
+<!--    <td th:text="${posts.createdAt}"></td>-->
+<!--  <td th:text="${posts.body}"></td>-->
+<!--&lt;!&ndash;   <li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <a href="${posts.applicationUser.id}"></a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </li>&ndash;&gt;-->
+
+
+<!--  </th>-->
+</main>
+
+</body>
+<footer>
+  <h2>Code Fellow Ship &copy;</h2>
+</footer>
+</html>

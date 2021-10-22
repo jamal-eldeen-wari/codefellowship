@@ -24,6 +24,7 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 //@SpringBootApplication
 //@ComponentScan(basePackageClasses = ApplicationController.class)
@@ -94,5 +95,39 @@ public class ApplicationController {
         model.addAttribute("username",applicationUser.getPosts());
         return new RedirectView("/profile");
     }
+
+
+    @GetMapping("/following")
+    public String getFollowing(Model model, Principal principal){
+        ApplicationUser applicationUser = appUserRepo.findApplicationUserByUsername(principal.getName());
+        Iterable<ApplicationUser> username = applicationUser.getFollowing();
+        model.addAttribute("username", username);
+        return "following";
+    }
+
+    @PostMapping("/follow/{id}")
+    public RedirectView followingUser(Principal principal, @PathVariable Long id){
+//        TO get the Logged-In Users
+        ApplicationUser applicationUser = appUserRepo.findApplicationUserByUsername(principal.getName());
+        ApplicationUser applicationUserFollow = appUserRepo.findApplicationUserById(id);
+
+        applicationUser.getFollowing().add(applicationUserFollow);
+        applicationUserFollow.getFollowers().add(applicationUser);
+        appUserRepo.save(applicationUser);
+        appUserRepo.save(applicationUserFollow);
+        return new RedirectView("/profile/{id}");
+    }
+
+    @GetMapping("/feed")
+    public String getPostFeed(Principal principal, Model model){
+        ApplicationUser applicationUser = appUserRepo.findApplicationUserByUsername(principal.getName());
+        List<ApplicationUser> following = applicationUser.getFollowing();
+        List<Post> posts = postRepo.findByApplicationUserIn(following);
+        model.addAttribute("posts",posts);
+        model.addAttribute("applicationUser",applicationUser.getPosts());
+        return "feed";
+    }
+
+
 
 }
